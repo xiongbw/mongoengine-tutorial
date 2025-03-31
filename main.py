@@ -15,6 +15,9 @@ def main():
     employee = employee_service.get_by_name('张三')
     print(employee)
 
+    # 4. 更新字段
+    employee_service.update_department(new_emp.id, '嗷嗷')
+
 
 if __name__ == "__main__":
     main()

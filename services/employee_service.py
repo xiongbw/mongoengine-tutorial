@@ -1,3 +1,5 @@
+from bson import ObjectId
+
 from config import mongo_connect
 from models.employee import Employee
 from mongoengine import DoesNotExist, MultipleObjectsReturned
@@ -41,3 +43,17 @@ def get_by_name(name):
     #     return None
     query_set = Employee.objects(name=name)
     return query_set.first()
+
+
+def update_department(emp_id, department):
+    """
+    更改部门
+    :param emp_id: the employee id
+    :param department: department name
+    """
+    if not ObjectId.is_valid(emp_id):
+        return None
+
+    query_set = Employee.objects(id=emp_id)
+    if query_set.count() > 0:
+        query_set.update_one(department=department)
