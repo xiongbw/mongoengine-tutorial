@@ -13,3 +13,10 @@ def hire_one(name, gender, department):
     employee = Employee(name=name, gender=gender, department=department)
     employee.save()
     return employee
+
+
+def get_all():
+    """
+    :return: All employees
+    """
+    return Employee.objects.all()
