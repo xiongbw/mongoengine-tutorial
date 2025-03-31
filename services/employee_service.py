@@ -57,3 +57,17 @@ def update_department(emp_id, department):
     query_set = Employee.objects(id=emp_id)
     if query_set.count() > 0:
         query_set.update_one(department=department)
+
+
+def fire_employee(emp_id: Employee.id):
+    """
+    解雇员工
+    :param emp_id: the employee id
+    :return: None
+    """
+    if not ObjectId.is_valid(emp_id):
+        return None
+
+    query_set = Employee.objects(id=emp_id)
+    if query_set.count() > 0:
+        query_set.delete()

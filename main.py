@@ -18,6 +18,9 @@ def main():
     # 4. 更新字段
     employee_service.update_department(new_emp.id, '嗷嗷')
 
+    # 5. 删除记录
+    employee_service.fire_employee(new_emp.id)
+
 
 if __name__ == "__main__":
     main()
