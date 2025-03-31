@@ -11,6 +11,10 @@ def main():
     for employees in all_employees:
         print(employees)
 
+    # 3. 条件查询获取一条记录
+    employee = employee_service.get_by_name('张三')
+    print(employee)
+
 
 if __name__ == "__main__":
     main()
