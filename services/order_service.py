@@ -88,3 +88,36 @@ def page_orders(page_num: int = 1, page_size: int = 5) -> List[Order]:
     """
     offset = (page_num - 1) * page_size
     return Order.objects(is_deleted=False).skip(offset).limit(page_size)
+
+
+def find_order_lines(order_id: Order.id) -> List[OrderLine]:
+    """
+    获取订单项列表
+    :param order_id: 订单 ID
+    :return: List[dict] with OrderLines
+    """
+    if not ObjectId.is_valid(order_id):
+        return []
+
+    pipeline = [
+        {'$match': {'_id': ObjectId(order_id), 'isDeleted': False}},
+        {'$project': {'_id': 0, 'orderLines': 1}},
+    ]
+    results = Order.objects().aggregate(pipeline)
+    order = next(results, None)
+    # -> List[dict]
+    # return order['orderLines'] if order else []
+    return [OrderLine(**line) for line in order['orderLines']] if order else []
+
+
+def count_city_orders():
+    """
+    统计城市订单数量
+    :return: Order quantity for all cities
+    """
+    pipeline = [
+        {'$match': {'isDeleted': False}},
+        {'$group': {'_id': '$city', 'count': {'$sum': 1}}},
+        {'$project': {'city': '$_id', 'count': '$count'}},
+    ]
+    return Order.objects().aggregate(pipeline)

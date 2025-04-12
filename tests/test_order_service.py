@@ -69,6 +69,17 @@ class TestOrderService(unittest.TestCase):
             for order in orders:
                 print(order)
 
+    def test_find_order_lines(self):
+        order_lines = order_service.find_order_lines("67f521c453c37e631d447575")
+        for order_line in order_lines:
+            print(order_line)
+
+    def test_count_city_orders(self):
+        city_orders_count = order_service.count_city_orders()
+        if city_orders_count:
+            for orders_count in city_orders_count:
+                print(f"City {orders_count['city']} has {orders_count['count']} orders.")
+
 
 if __name__ == '__main__':
     unittest.main()
