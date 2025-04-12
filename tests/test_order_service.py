@@ -49,6 +49,13 @@ class TestOrderService(unittest.TestCase):
         count = order_service.count_user_orders(user_id)
         print(f"User {user_id} has {count} orders")
 
+    def test_find_orders_by_time(self):
+        start_time = datetime(2024, 10, 15, 14, 30, 0)
+        end_time = datetime(2025, 10, 15, 14, 30, 0)
+        orders = order_service.find_orders_by_time(start_time, end_time)
+        for order in orders:
+            print(order)
+
 
 if __name__ == '__main__':
     unittest.main()
