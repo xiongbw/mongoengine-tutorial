@@ -56,6 +56,19 @@ class TestOrderService(unittest.TestCase):
         for order in orders:
             print(order)
 
+    def test_page_orders(self):
+        total_count = order_service.count_orders()
+        print(f"Total orders: {total_count}")
+        if total_count == 0:
+            return None
+
+        page_size = 3
+        total_pages = (total_count + page_size - 1) // page_size
+        for page_num in range(1, total_pages + 1):
+            orders = order_service.page_orders(page_num, page_size)
+            for order in orders:
+                print(order)
+
 
 if __name__ == '__main__':
     unittest.main()
