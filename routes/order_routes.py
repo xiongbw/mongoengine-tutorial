@@ -89,3 +89,13 @@ def get_order_lines(order_id):
         for order_line in order_lines
     ]
     return {"success": True, "data": result_data}, 200
+
+
+@bp_order.route(f"{__API_PREFIX__}/countCityOrders", methods=['GET'])
+def count_city_orders():
+    city_orders_count = order_service.count_city_orders()
+    orders_count = [
+        {'city': city_order['city'], 'count': city_order['count']}
+        for city_order in city_orders_count
+    ]
+    return {"success": True, "data": orders_count}, 200
