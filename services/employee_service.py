@@ -1,3 +1,5 @@
+from typing import List
+
 from models.employee import Employee
 
 
@@ -12,3 +14,9 @@ def hire_one(department: str, name: str, gender: str) -> Employee:
     employee = Employee(name=name, gender=gender, department=department)
     return employee.save()
 
+
+def get_all() -> List[Employee]:
+    """
+    :return: All employees
+    """
+    return Employee.objects.all()
