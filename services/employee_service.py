@@ -48,3 +48,12 @@ def update_department(emp_id, department):
     query_set = Employee.objects(id=emp_id)
     if query_set.count() > 0:
         query_set.update_one(department=department)
+
+
+def get_by_name(name: str) -> List[Employee]:
+    """
+    Get employee by name
+    :param name: employee name
+    :return: List of employee objects
+    """
+    return Employee.objects(name=name).all()
