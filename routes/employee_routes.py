@@ -20,3 +20,12 @@ def hire_employee():
         result_data = {'id': str(emp.id), 'name': emp.name, 'gender': emp.gender, 'department': emp.department}
         return {"success": True, "data": result_data}, 200
 
+
+@bp_employee.route(f"{__API_PREFIX__}/list", methods=['GET'])
+def all_employees():
+    employee_list = employee_service.get_all()
+    employees = [
+        {'id': str(emp.id), 'name': emp.name, 'gender': emp.gender, 'department': emp.department}
+        for emp in employee_list
+    ]
+    return {"employees": employees}
