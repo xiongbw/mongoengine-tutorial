@@ -72,3 +72,12 @@ def count_user_orders(user_id: int) -> int:
     """
     return Order.objects(user_id=user_id, is_deleted=False).count()
 
+
+def find_orders_by_time(start_time: datetime, end_time: datetime) -> List[Order]:
+    """
+    通过创建时间查询订单
+    :param start_time: 开始时间
+    :param end_time: 结束时间
+    :return: Order List
+    """
+    return Order.objects(create_time__gte=start_time, create_time__lte=end_time, is_deleted=False)
