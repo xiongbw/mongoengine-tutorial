@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from decimal import Decimal
 
 from flask import Blueprint, request
@@ -55,3 +56,15 @@ def count_orders():
 def count_user_orders(user_id):
     count = order_service.count_user_orders(user_id)
     return {"success": True, "data": count}
+
+
+@bp_order.route(f"{__API_PREFIX__}/getByTime", methods=['GET'])
+def get_orders_by_time():
+    # 获取时间戳
+    start_time = request.args.get('start_time', type=int, default=None)
+    end_time = request.args.get('end_time', type=int, default=None)
+    # 获取 UTC 时间并手动 +8h 得到 UTC+8 时间
+    start_datetime = datetime.utcfromtimestamp(start_time) + timedelta(hours=8)
+    end_datetime = datetime.utcfromtimestamp(end_time) + timedelta(hours=8)
+    count = order_service.find_orders_by_time(start_datetime, end_datetime)
+    return {"success": True, "data": count}, 200
