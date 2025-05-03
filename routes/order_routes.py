@@ -41,3 +41,12 @@ def create_order():
 def get_order(order_id):
     order = order_service.find_one(order_id)
     return {"success": True, "data": {"order": order}}
+
+
+@bp_order.route(f"{__API_PREFIX__}/count", methods=['GET'])
+def count_orders():
+    country = request.args.get("country", type=str, default=None)
+    city = request.args.get("city", type=str, default=None)
+    count = order_service.count_orders(country, city)
+    return {"success": True, "data": count}
+
