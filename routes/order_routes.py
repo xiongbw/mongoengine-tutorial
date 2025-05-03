@@ -76,3 +76,16 @@ def page_orders():
     page_size = request.args.get('page_size', default=10, type=int)
     orders = order_service.page_orders(page_num, page_size)
     return {"success": True, "data": orders}, 200
+
+
+@bp_order.route(f"{__API_PREFIX__}/<order_id>/lines", methods=['GET'])
+def get_order_lines(order_id):
+    order_lines = order_service.find_order_lines(order_id)
+    # Decimal128 是 MongoDB 的特殊类型，需先通过 .to_decimal() 转为 Python 的 Decimal
+    # 再进一步转为 float 或 str（金额类数据建议用 str 避免精度丢失）
+    result_data = [
+        {'cost': str(order_line.cost.to_decimal()), 'qty': order_line.qty, 'sku': order_line.sku,
+         'product': order_line.product, 'price': str(order_line.price.to_decimal())}
+        for order_line in order_lines
+    ]
+    return {"success": True, "data": result_data}, 200
