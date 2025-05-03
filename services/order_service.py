@@ -46,3 +46,19 @@ def find_one(order_id: Order.id):
         return None
 
     return Order.objects(id=order_id, is_deleted=False).first()
+
+
+def count_orders(country: str = None, city: str = None) -> int:
+    """
+    统计订单数量
+    :param country: 国家
+    :param city: 城市
+    :return: Orders count
+    """
+    query_filter = {'is_deleted': False}
+    if country and country.strip():
+        query_filter['country'] = country
+    if city and city.strip():
+        query_filter['city'] = city
+
+    return Order.objects(**query_filter).count()
