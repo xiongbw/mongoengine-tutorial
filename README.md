@@ -14,6 +14,8 @@
 - [MongoDB 官方网站](https://www.mongodb.com/)
 - [MongoEngine 官方网站](http://mongoengine.org/)
 - [MongoEngine 用户手册](https://docs.mongoengine.org/)
+- [Flask 官方网站](https://flask.palletsprojects.com/en/stable/)
+- [Flask-MongoEngine 官方网站](https://docs.mongoengine.org/projects/flask-mongoengine/en/latest/index.html)
 
 ## 文章推荐
 
