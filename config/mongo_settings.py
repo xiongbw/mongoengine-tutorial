@@ -18,6 +18,15 @@ class MongoConfig:
         'port': 27017
     }
 
+    """
+    Config for MongoDB Replica Set Server
+    """
+    REPLICA_SETTINGS = {
+        'alias': 'replication',
+        'host': 'mongodb://localhost:37017,localhost:37018,localhost:37019/db_charge?replicaSet=rs0',
+    }
+
     MONGODB_SETTINGS = [
-        STANDALONE_SERVER
+        STANDALONE_SERVER,
+        REPLICA_SETTINGS
     ]
