@@ -51,3 +51,13 @@ def update_department(emp_id):
         employee_service.update_department(emp_id, **body)
         return {"success": True}, 200
 
+
+@bp_employee.route(f"{__API_PREFIX__}/getByName", methods=['GET'])
+def get_employees_by_name():
+    name = request.args['name']
+    employee_list = employee_service.get_by_name(name)
+    employees = [
+        {'id': str(emp.id), 'name': emp.name, 'gender': emp.gender, 'department': emp.department}
+        for emp in employee_list
+    ]
+    return {"employees": employees}
