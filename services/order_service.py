@@ -81,3 +81,14 @@ def find_orders_by_time(start_time: datetime, end_time: datetime) -> List[Order]
     :return: Order List
     """
     return Order.objects(create_time__gte=start_time, create_time__lte=end_time, is_deleted=False)
+
+
+def page_orders(page_num: int = 1, page_size: int = 5) -> List[Order]:
+    """
+    分页查询订单
+    :param page_num: 页码
+    :param page_size: 页面大小
+    :return: 页面订单列表
+    """
+    offset = (page_num - 1) * page_size
+    return Order.objects(is_deleted=False).skip(offset).limit(page_size)
