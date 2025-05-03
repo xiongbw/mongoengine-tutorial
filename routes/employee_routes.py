@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 
-from forms.employee_forms import HireEmployeeForm
+from forms.employee_forms import DepartmentForm, HireEmployeeForm
 from services import employee_service
 
 bp_employee = Blueprint('employee', __name__)
@@ -38,3 +38,16 @@ def get_employee_by_id(emp_id):
         return {'employee': {'name': employee.name, 'gender': employee.gender, 'department': employee.department}}
     else:
         return {'employee': {}}
+
+
+@bp_employee.route(f"{__API_PREFIX__}/<emp_id>/updateDept", methods=['POST'])
+def update_department(emp_id):
+    body = request.get_json()
+    form = DepartmentForm(data=body)
+
+    if not form.validate():
+        return {"success": False, "errors": form.errors}, 400
+    else:
+        employee_service.update_department(emp_id, **body)
+        return {"success": True}, 200
+
