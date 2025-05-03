@@ -68,3 +68,11 @@ def get_orders_by_time():
     end_datetime = datetime.utcfromtimestamp(end_time) + timedelta(hours=8)
     count = order_service.find_orders_by_time(start_datetime, end_datetime)
     return {"success": True, "data": count}, 200
+
+
+@bp_order.route(f"{__API_PREFIX__}/page", methods=['GET'])
+def page_orders():
+    page_num = request.args.get('page_num', default=1, type=int)
+    page_size = request.args.get('page_size', default=10, type=int)
+    orders = order_service.page_orders(page_num, page_size)
+    return {"success": True, "data": orders}, 200
