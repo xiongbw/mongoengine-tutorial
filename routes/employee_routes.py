@@ -1,5 +1,22 @@
-from flask import Blueprint
+from flask import Blueprint, request
+
+from forms.employee_forms import HireEmployeeForm
+from services import employee_service
 
 bp_employee = Blueprint('employee', __name__)
 
 __API_PREFIX__ = "/employee"
+
+
+@bp_employee.route(f"{__API_PREFIX__}/hire", methods=['POST'])
+def hire_employee():
+    body = request.get_json()
+    form = HireEmployeeForm(data=body)
+
+    if not form.validate():
+        return {"success": False, "errors": form.errors}, 400
+    else:
+        emp = employee_service.hire_one(**body)
+        result_data = {'id': str(emp.id), 'name': emp.name, 'gender': emp.gender, 'department': emp.department}
+        return {"success": True, "data": result_data}, 200
+
