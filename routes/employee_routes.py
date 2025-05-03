@@ -29,3 +29,12 @@ def all_employees():
         for emp in employee_list
     ]
     return {"employees": employees}
+
+
+@bp_employee.route(f"{__API_PREFIX__}/<emp_id>/info", methods=['GET'])
+def get_employee_by_id(emp_id):
+    employee = employee_service.get_by_id(emp_id)
+    if employee:
+        return {'employee': {'name': employee.name, 'gender': employee.gender, 'department': employee.department}}
+    else:
+        return {'employee': {}}
