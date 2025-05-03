@@ -61,3 +61,9 @@ def get_employees_by_name():
         for emp in employee_list
     ]
     return {"employees": employees}
+
+
+@bp_employee.route(f"{__API_PREFIX__}/<emp_id>/fire", methods=['POST'])
+def fire_employee(emp_id):
+    fired = employee_service.fire_one(emp_id)
+    return {"success": fired > 0}
