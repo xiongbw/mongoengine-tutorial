@@ -57,3 +57,19 @@ def get_by_name(name: str) -> List[Employee]:
     :return: List of employee objects
     """
     return Employee.objects(name=name).all()
+
+
+def fire_one(emp_id: ObjectId) -> int:
+    """
+    解雇员工
+    :param emp_id: the employee id
+    :return: Updated rows
+    """
+    if not ObjectId.is_valid(emp_id):
+        return 0
+
+    query_set = Employee.objects(id=emp_id)
+    if query_set.count() > 0:
+        return query_set.delete()
+    else:
+        return 0
