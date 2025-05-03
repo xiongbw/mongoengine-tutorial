@@ -50,3 +50,8 @@ def count_orders():
     count = order_service.count_orders(country, city)
     return {"success": True, "data": count}
 
+
+@bp_order.route(f"{__API_PREFIX__}/<int:user_id>/count", methods=['GET'])
+def count_user_orders(user_id):
+    count = order_service.count_user_orders(user_id)
+    return {"success": True, "data": count}
