@@ -35,3 +35,16 @@ def get_by_id(emp_id: str) -> Employee:
     else:
         return Employee.objects(id=emp_id).first()
 
+
+def update_department(emp_id, department):
+    """
+    更改部门
+    :param emp_id: the employee id
+    :param department: department name
+    """
+    if not ObjectId.is_valid(emp_id):
+        return None
+
+    query_set = Employee.objects(id=emp_id)
+    if query_set.count() > 0:
+        query_set.update_one(department=department)
