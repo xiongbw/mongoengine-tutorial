@@ -35,3 +35,9 @@ def create_order():
         body["order_lines"] = order_lines
         order = order_service.create_one(**body)
         return {"success": True, "data": {"order": order}}, 200
+
+
+@bp_order.route(f"{__API_PREFIX__}/<order_id>/info", methods=['GET'])
+def get_order(order_id):
+    order = order_service.find_one(order_id)
+    return {"success": True, "data": {"order": order}}
