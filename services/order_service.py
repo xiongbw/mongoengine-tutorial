@@ -112,3 +112,16 @@ def find_order_lines(order_id: Order.id) -> List[OrderLine]:
     # -> List[dict]
     # return order['orderLines'] if order else []
     return [OrderLine(**line) for line in order['orderLines']] if order else []
+
+
+def count_city_orders():
+    """
+    统计城市订单数量
+    :return: Order quantity for all cities
+    """
+    pipeline = [
+        {'$match': {'isDeleted': False}},
+        {'$group': {'_id': '$city', 'count': {'$sum': 1}}},
+        {'$project': {'city': '$_id', 'count': '$count'}},
+    ]
+    return Order.objects().aggregate(pipeline)
