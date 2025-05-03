@@ -2,6 +2,8 @@ from datetime import datetime
 from decimal import Decimal
 from typing import List
 
+from bson import ObjectId
+
 from constants.order_status_enums import OrderStatusEnum
 from models.order import Order, OrderLine
 
@@ -32,3 +34,15 @@ def create_one(city: str, country: str, name: str, phone: str, state: str, stree
     order = Order(city, country, now, False, name, now, phone, shipping_fee, state,
                   OrderStatusEnum.CREATED.value, street, total, now, user_id, zip, order_lines)
     return order.save()
+
+
+def find_one(order_id: Order.id):
+    """
+    获取订单
+    :param order_id: 订单 ID
+    :return: Order object
+    """
+    if not ObjectId.is_valid(order_id):
+        return None
+
+    return Order.objects(id=order_id, is_deleted=False).first()
