@@ -62,3 +62,13 @@ def count_orders(country: str = None, city: str = None) -> int:
         query_filter['city'] = city
 
     return Order.objects(**query_filter).count()
+
+
+def count_user_orders(user_id: int) -> int:
+    """
+    统计用户订单数量
+    :param user_id: 用户 ID
+    :return: Order count
+    """
+    return Order.objects(user_id=user_id, is_deleted=False).count()
+
