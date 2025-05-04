@@ -17,24 +17,8 @@
 - [Flask 官方网站](https://flask.palletsprojects.com/en/stable/)
 - [Flask-MongoEngine 官方网站](https://docs.mongoengine.org/projects/flask-mongoengine/en/latest/index.html)
 
-## 文章推荐
+## 学习路线
 
-### 基础篇
-
-1. [介绍：推开新世界的大门](https://mp.weixin.qq.com/s/gcyJunjg5Tx6AV73bfWPKg)
-2. [安装：Windows、macOS 和 Linux 图文安装](https://mp.weixin.qq.com/s/yaPbuUqMF_4oFkaoCqilJQ)
-3. [基础操作：你最关心的 CRUD 在这里](https://mp.weixin.qq.com/s/Wkfb04mUlLMSsoGlH9PM1A)
-
-### 进阶篇
-
-4. [聚合查询：使用管道实现复杂分析](https://mp.weixin.qq.com/s/2ySN-M2J84ztLnw2FzRyZQ)
-5. [JSON 文档模型设计：Mongo 套路深，我要回农村](https://mp.weixin.qq.com/s/ILMM87QLvj13maCew7kTJg)
-
-### 高级篇
-
-6. [复制集：分布式数据存储和高可用性](https://mp.weixin.qq.com/s/dbSw4p3SItN47M0HCHD8jg)
-7. [事务机制：基于 ACID 的操作和并发控制](https://mp.weixin.qq.com/s/kYnPfA1xdNxUI0iKhjlGfw)
-
-## 公众号
-
-![CodeArtist9](https://code-artist.oss-cn-shenzhen.aliyuncs.com/qrcode/qrcode_for_gh.jpg)
+- [MongoDB 指南](https://github.com/xiongbw/mongodb-guide)
+- [MongoEngine 使用](https://github.com/xiongbw/mongoengine-tutorial/tree/main)
+- [Flask-MongoEngine 使用](https://github.com/xiongbw/mongoengine-tutorial/tree/develop/flask)
